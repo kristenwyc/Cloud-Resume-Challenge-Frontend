@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google Fots -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Remixicon Icon -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <!-- Remixicon Icon -->
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Main CSS -->
+    <link href="assets/css/main.css" rel="stylesheet" />
+
+    <title>Kristen Cheung</title>
+  </head>
+  <body>
+    <!-- header -->
+    <header class="ds-header" id="site-header">
+      <div class="container">
+        <div class="ds-header-inner">
+          <!-- logo -->
+          <a href="https://kristenwyc.com" class="ds-logo">
+            <span>K</span>Kristen Cheung
+          </a>
+          <!-- logo -->
+          <!-- social -->
+          <ul class="ds-social">
+            <li>
+              <a href="https://github.com/kristenwyc" target="_blank"
+                ><i class="ri-github-fill"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/kristenwyc/" target="_blank"
+                ><i class="ri-linkedin-fill"></i
+              ></a>
+            </li>
+          </ul>
+          <!-- social -->
+        </div>
+      </div>
+    </header>
+    <!-- header -->
+
+    <main class="ds-main-section">
+      <div class="container">
+        <div class="ds-work-details-section">
+          <div class="text-center">
+            <a href="https://kristenwyc.com" class="ds-button ds-arrow-button"
+              ><i class="ri-arrow-left-s-line"></i> BACK</a
+            >
+          </div>
+          <div class="row justify-content-center">
+            <div
+              class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 col-xxl-10"
+            >
+              <header class="ds-work-det-hed">
+                <h1 class="ds-work-det-title">Cloud Resume Challenge</h1>
+                <span class="ds-work-det-dep"></span>
+              </header>
+
+              <figure class="projects">
+                <img src="assets/images/CloudResumeDiagram.jpg" />
+              </figure>
+              <div class="ds-work-content-sec">
+                <div class="row justify-content-center">
+                  <div
+                    class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 col-xxl-8"
+                  >
+                    <p>
+                      When I first passed the AWS Solutions Architect Associate
+                      exam, I immediately started looking for projects to
+                      utilize my skills and gain more hands-on experience. I
+                      first saw this project being greatly discussed in the
+                      online cloud community and thought I would take up the
+                      challenge. This is my attempt at the AWS Cloud Resume
+                      Challenge created and published by Forrest Brazeal. (This
+                      website is the project, by the way!)
+                    </p>
+
+                    <h2>Frontend</h2>
+
+                    <p>
+                      This project has numerous components. The user interface
+                      was simple. It was created using HTML, CSS, and
+                      Javascript. My website is not flashy (obviously), but I
+                      don't believe it is essential for a cloud project. My
+                      frontend files were hosted on S3. I bought a domain from
+                      Route 53 and set up a distribution on Cloudfront to take
+                      advantage of the edge locations where my website's content
+                      is delivered. I then utilized ACM (AWS Certificate
+                      Manager) to request a certificate for my domain so that my
+                      website could be secured using HTTPS.
+                    </p>
+
+                    <p>
+                      While doing all of this, I ran into a handful of little
+                      difficulties. For example, I ran into a problem with Route
+                      53's NS records. When I started this project, I decided to
+                      use AWS IAM Identity Center (previously AWS Single
+                      Sign-On) and set up a separate AWS account solely for this
+                      project's development. However, I had purchased the domain
+                      using a different AWS account previously, so I migrated
+                      the domain between accounts and created a new hosted zone.
+                      It took me a bit of time to realize I needed to update the
+                      domain registration with the existing NS records. After
+                      that, I was able to set up Route 53 to point my domain
+                      name to the CloudFront distribution. I then forgot about
+                      Cloudfront caching as I was trying to update the files.
+                      Well, I was not going to wait 24 hrs for my website to be
+                      updated. I thought of invalidating the files on
+                      Cloudfront. However, in order to make new files available
+                      instantly in a more cost-effective approach, I chose to
+                      update existing files using custom-versioned file names.
+                      Overall, these steps were very straightforward in
+                      comparison to what came next. But at this time, I recall
+                      thinking, "I must be halfway there!" Ha. I was naive.
+                    </p>
+
+                    <h2>Backend</h2>
+
+                    <p>
+                      I started working on the backend of the project, and
+                      considering the project's requirements for a NoSQL
+                      database, DynamoDB is a suitable choice. For the visitor
+                      counter, I created a table with a single number field. I
+                      then went to Lambda and wrote a function in Python. Since
+                      I had limited familiarity with Python, I had to do a bit
+                      of research before I could write the code. The goal was to
+                      have the function save a value to the DynamoDB table
+                      everytime it is called. I also had to figure out the IAM
+                      permissions between the function and the table. What was
+                      frustrating and unclear to me at first was the CORS error
+                      I was receiving. After a significant amount of googling, I
+                      learned the proper headers to the Lambda function's
+                      response are required. I did some tests in the AWS console
+                      and was relieved to see that my counter was finally
+                      working.
+                    </p>
+
+                    <p>
+                      I then moved onto the API Gateway and created a route in
+                      front of my Lambda function to prevent direct connection
+                      between my Javascript code on the webpage and my DynamoDB
+                      table. I used the POST HTTP method because it is commonly
+                      used to update API resources (my visitor counter has to be
+                      incremented every time this function is called). I also
+                      added a Route 53 record to the API Gateway and generated
+                      an API mapping that points to the API. Although this was
+                      optional, I now have a secure API endpoint. The final step
+                      in this section was to write some Javascript code that
+                      called an API to update my DynamoDB table and display the
+                      revised count.
+                    </p>
+
+                    <h2>Infrastructure as Code</h2>
+
+                    <p>
+                      In this section, I chose to challenge myself by learning
+                      Terraform, which may be the most used DevOps tool these
+                      days. It was confusing at first having to convert all of
+                      my existing AWS resources into Terraform code. This is
+                      when I discovered how powerful Terraform could be.
+                      Infrastructure as Code defines and deploys the
+                      infrastructure settings you need, which means I can
+                      instantly recreate my resume if I destroy it or move it to
+                      another cloud provider. I can see how this can
+                      significantly streamline processes, save valuable time and
+                      reduce errors. I think I am ready for the DevOps life, ha!
+                    </p>
+
+                    <p>
+                      My experience with the Cloud Resume challenge was
+                      rewarding. The project itself was definitely unique and
+                      challenging. The components and services covered provided
+                      me a comprehensive overview of job-related skills and
+                      knowledge required. It took approximately a month for me
+                      to complete most of the essentials. I intend to go back
+                      and refactor some of the code soon in addition to adding
+                      some tests and features. But for now, this is where I will
+                      pause and reflect.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!--  footer -->
+    <footer class="ds-footer text-center">
+      <div class="container">
+        <section>
+          <h4>Ready to talk?</h4>
+          <br />
+          <a href="kristenwyc@gmail.com" class="ds-button">Let's Chat!</a>
+        </section>
+        <span class="ds-copyright"
+          >© Kristen Cheung 2023. All rights reserved.
+        </span>
+      </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
